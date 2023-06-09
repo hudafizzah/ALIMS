@@ -446,7 +446,7 @@ button[type="reset"] {
                 <a href="ListOutdatedAsset.jsp">
                     List Outdated Asset
                 </a>
-                <a href="#">
+                <a href="manageInventory.jsp">
                     Manage Inventory
                 </a>
                 <a href="index.html">

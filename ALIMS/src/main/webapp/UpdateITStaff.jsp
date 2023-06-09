@@ -178,12 +178,10 @@
                 <a href="#">
                     Register Asset
                 </a>
-                <a href="#">
+                <a href="ListAsset.jsp">
                     List Asset
                 </a>
-                <a href="#">
-                    List Staff
-                </a>
+            
                  <a href="#">
                     List Application
                 </a>

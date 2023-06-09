@@ -382,7 +382,7 @@ form{
             </div>
             <nav class="navbar">
            
-				<a href="#" class="active">
+				<a href="ManagerHomepage" class="active">
                     Home Manager
                 </a>
                 <a href="ListApplication.jsp">

@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="Asset.dao.AssetDao" %>
 <%@ page import="connectionDB.*" %>
+<%@page import="java.sql.ResultSet" %>
+<%@page import="java.sql.Statement" %>
+<%@page import="java.util.List" %>
+<%@page import="inventory.dao.InventoryDao" %>
+<%@page import="model.Inventory" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %> <%-- Number formatter --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -425,9 +432,7 @@ button[type="reset"] {
             </div>
              <nav class="navbar">
            
-				 <a href="DashboardITSTAFF.jsp" >
-                    Dashboard
-                </a>
+				
                	<a href="ITStaff Homepage.jsp" class="">
                     Homepage
                 </a>
@@ -462,49 +467,38 @@ button[type="reset"] {
   <form method="post" action ="AddAssetController">
   
     <div class="form-group">
-      <label for="Asset ID">Asset ID:</label>
-      <input type="text"  name="AssetID" required>
+      <label for="AssetID">Asset ID:</label>
+	    <%
+		    int randomNumber = (int) (Math.random() * 1000000);
+		%>
+		<input type="text" name="AssetID" value="<%= randomNumber %>" readonly>
     </div>
     <div class="form-group">
       <label for="Asset date">Asset Date Purchase:</label>
       <input type="date"  name="asset_datepurchase" required>
     </div>
 
-    <div class="form-group">
-      <label for="modelname">Model Name</label>
-       <select  name="modelname">
-        <option value="1">Microsoft Surface 7</option>
-        <option value="2">Microsoft surface Pro 9</option>
-        <option value="3">Microsoft surface Pro 5</option>
-        <option value="4">HP EliteBook</option>
-        <option value="5">Dell Inspiron16</option>
-        
-      </select>
-  
-    </div>
-    
-    <div class="form-group">
-      <label for="manufacturer">Manufacturer</label>
-      <input type="text"  name="manufacturer" required>
-    </div>
-    
   <div class="form-group">
-      <label for="Inventory id">Inventory ID</label>
+      <label for="inventoryid">Asset Model</label>
       <select id="inventoryid" name="inventoryid">
-        <option value="1">1001</option>
-        <option value="2">1002</option>
-        <option value="3">1003</option>
-        <option value="4">1004</option>
-        <option value="5">1005</option>
+      
+      <%
+          InventoryDao dao = new InventoryDao();
+          List<Inventory> inventory = dao.getAllInventories();
+          for (Inventory each: inventory) {
+      %>
+      
+        <option value="<%= each.getId() %>"><%= each.getCompleteName() %></option>
+        <% } %>
       </select>
     </div>
     
-        <div class="form-group">
+    <div class="form-group">
       <label for="StaffID">Staff ID</label>
-      <input type="text"  name="StaffID" >
+      <input type="text"  name="StaffID" value="<%= session.getAttribute("staffID") %>" readonly >
     </div>
     
-  <button type="submit">Submit</button>
+  <button type="submit">Register</button>
   <button type="reset" style="padding-left:;">Reset</button>
   </form>
     </div>

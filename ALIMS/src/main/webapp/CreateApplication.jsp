@@ -2,8 +2,17 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="connectionDB.*" %>
+<%@ page import="model.Asset"%>
+<%@ page import="Asset.dao.AssetDao"%>
+<%@ page import="java.util.List"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%-- SQL --%>
+<!--  --<link rel="stylesheet" href="css/bootstrap.css"></link>--!
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %> <%-- Number formatter --%>
+<%-- Number formatter --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -281,15 +290,6 @@ select:focus {
   outline: none;
 }
 
-button[type="submit"] {
-  background-color: #4d814a;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-}
 button[type="reset"] {
   background-color: grey;
   color: #fff;
@@ -333,10 +333,7 @@ button[type="reset"] {
                 <a href="MyApplication.jsp">
                     My Application
                 </a>
-                <a href="#">
-                    Profile
-                </a>
-             
+                
                 <a href="index.html">
                     Logout
                 </a>
@@ -344,87 +341,62 @@ button[type="reset"] {
             </nav>
     </section> 
 
-	<section class= "banner" >
-	
-	<div class="loan-request-form-container" >
-  <form method="post" action = "" >
-  
- 
+		<section class="banner">
 
-    <div class="form-group">
-      <label for="appid">Application ID</label>
-      <input type="text"  name="appid" required>
-    </div>
-    
-      
-  <div class="form-group">
-      <label for="loanperiod">Loan Period</label>
-      <select type= "date" name="loanperiod">
-        <option value="">1 week</option>
-        <option value="">2 week</option>
-      </select>
-    </div>
-    
+		<div class="loan-request-form-container">
+			<form method="post" action="CreateApplicationController">
 
-      <div class="form-group">
-      <label for="purpose">Purpose</label>
-      <input type="text"  name="purpose" required>
-    </div>
-    
-     <div class="form-group">
-      <label for="total asset">Total Laptop</label>
-      <input type="text"  name="total_asset" required>
-    </div>
-    
-    <div class="form-group">
-      <label for="startdateloan">Start Date Loan</label>
-      <input type="date"  name="startdateloan" required>
-    </div>
-    
-      <div class="form-group">
-      <label for="date returned">Date Return</label>
-      <input type="date"  name="datereturned" required>
-    </div>
-    
-     <div class="form-group">
-      <label for="modelname">Model Name</label>
-       <select  name="modelname">
-        <option value="1">Microsoft Surface 7</option>
-        <option value="2">Microsoft surface Pro 9</option>
-        <option value="3">Microsoft surface Pro 5</option>
-        <option value="4">HP EliteBook</option>
-        <option value="5">Dell Inspiron16</option>
-      </select>
-    </div>
-    
-     <div class="form-group" hidden>
-      <label for="asset_status">Status Asset</label>
-       <select  name="asset_status">
-        <option value="1">available</option>
-        <option value="2">not available</option>
+			<div class="form-group">
+					<label for="appid">Application ID</label>
+					<%
+					    int randomNumber = (int) (Math.random() * 1000000);
+					%>
+					 <input type="text" name="appid" value="<%= randomNumber %>" readonly>
+				</div>
+
+				<div class="form-group">
+					<label for="purpose">Purpose</label> <input type="text"
+						name="purpose" required>
+				</div>
+
+				<div class="form-group">
+					<label for="total asset">Total Laptops</label> <input type="text"
+						name="total_asset" required>
+				</div>
+
+				<div class="form-group">
+					<label for="startdateloan">Start Date Loan</label> <input
+						type="date" name="startdateloan" required>
+				</div>
+
+				<div class="form-group">
+					<label for="date returned">Date Return</label> <input type="date"
+						name="datereturned" required>
+				</div>
+
+				<div class="form-group">
+					<label for="appmodelid">Asset Model</label> <select
+						name="appmodelid">
+						<%
+						List<Asset> assets = AssetDao.getAllAssetsList();
+						for (Asset asset : assets) {
+						%>
+						<option value="<%=asset.getAssetID()%>"><%=asset.getCompleteAssetString()%></option>
+						<%
+						}
+						%>
+					</select>
+				</div>
+
+				<input type="hidden" name="StaffID"
+					value="<%=session.getAttribute("staffID")%>"> <input
+					type="submit" value="Submit">
+				<button type="reset" style="padding-left:;">Reset</button>
+			</form>
+		</div>	
+	</section>
         
-      </select>
-    </div>
-    
-     <div class="form-group" hidden>
-      <label for="assetid">Asset ID</label>
-      <input type="text"  name="assetid" required>
-    </div>
-    
-     <div class="form-group" hidden>
-      <label for="staffid">Staff ID</label>
-      <input type="text"  name="StaffID" required>
-    </div>
-    
-      <div class="form-group" hidden>
-      <label for="status_app">Application Status</label>
-      <input type= "text" name="status_app" required>
-    </div>
-   
-    <button type="submit">Submit</button>
-      <button type="reset" style="padding-left:;">Reset</button>
-  </form>
-</div>
+  
 </section>
  <footer class="footer">
             © 2023. All Rights Reserved.

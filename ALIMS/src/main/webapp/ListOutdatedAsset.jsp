@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.List" %>
+<%@page import="Asset.dao.AssetDao" %>
+<%@page import="model.Asset" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -334,8 +337,11 @@
                <img src="assets/logo.png" />
             </div>
             <nav class="navbar">
-                <a href="DashboardITSTAFF.jsp" >
-                    Dashboard
+               <a href="ITStaff Homepage.jsp" >
+                    Homepage
+                </a>
+                 <a href="RegisterAsset.jsp">
+                    Register Asset
                 </a>
                 <a href="ListAsset.jsp">
                     List Asset
@@ -343,8 +349,7 @@
                 <a href="ListApprovedApplication.jsp">
                     List Approved Application
                 </a>
-                <a href="ListReturnAsset.jsp">
-                    List Return Asset
+              
                 </a>
                 <a href="ListOutdatedAsset.jsp" class="active">
                     List Outdated Asset
@@ -416,23 +421,31 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        <%
+                                        
+                                        List<Asset> assetsList = AssetDao.getOutdatedAsset(Integer.parseInt(session.getAttribute("staffID").toString()));
+                                        for (Asset each: assetsList) {
+                                        
+                                        %>
                                             <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                               <td><%= each.getAssetID() %></td>
+                                                <td><%= each.getModelname() %></td>
+                                                <td><%= each.getAsset_datepurchase() %></td>
+                                                <td><%= each.getManufacturer() %></td>
+                                                <td><%= each.getYearsSincePurchase() %> Years</td>
+                                                <td><%= each.getInventoryid() %></td>
+                                                <td><%= each.getStaffID() %></td>
                                                 
                                                
                                                 <td>
                                                     <div class="action">
-                                                      	<button class="button view">View</button>
-                                                        <button class="button delete">Delete</button>
+                                                    <a href="DeleteAssetController?deleteassetid=<%= each.getAssetID() %>"class="button delete">Delete</a>
                                                     </div>
                                                 </td>
                                             </tr>
+                                            <%
+                                        }
+                                            %>
                                         </tbody>
                                        
                                     </table>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
    
 <!DOCTYPE html>
 
@@ -398,10 +399,7 @@ form{
                 <a href="MyApplication.jsp">
                     My Application
                 </a>
-                <a href="#">
-                    Profile
-                </a>
-             
+               
                 <a href="index.html">
                     Logout
                 </a>
@@ -415,106 +413,57 @@ form{
 	<table>
 		<tr>
 			<td id="col-span-25">Staff ID</td>
-			<td id="col-span-75">:&nbsp;<c:out value="${s.StaffID}"/></td>
+			<td id="col-span-75">:&nbsp;${sessionScope.s.staffID}</td>
 		</tr>
 		
 		<tr>
 			<td id="col-span-25">Staff Name</td>
-			<td id="col-span-75">:&nbsp;<c:out value="${s.staffname}"/></td>
+			<td id="col-span-75">:&nbsp;${sessionScope.s.staffname}</td>
 		</tr>
 		<tr>
 			<td id="col-span-25">Phone Number</td>
-			<td id="col-span-75">:&nbsp;<c:out value="${s.phoneNum}"/></td>
+			<td id="col-span-75">:&nbsp;${sessionScope.s.phoneNum}</td>
 		</tr>
 		
 		<tr>
 			<td id="col-span-25">Email Staff</td>
-			<td id="col-span-75">:&nbsp;<c:out value="${s.EmailStaff}"/></td>
+			<td id="col-span-75">:&nbsp;${sessionScope.s.emailStaff}</td>
 		</tr>
 		
 		<tr>
 			<td id="col-span-25">Role</td>
-			<td id="col-span-75">:&nbsp;<c:out value="${s.role}"/></td>
+			<td id="col-span-75">:&nbsp;${sessionScope.s.role}</td>
 		</tr>
 		
 		<tr>
 			<td id="col-span-25">Job Position</td>
-			<td id="col-span-75">:&nbsp;<c:out value="${s.JobPosition}"/></td>
+			<td id="col-span-75">:&nbsp;${sessionScope.s.jobPosition}</td>
 		</tr>
 		
 		<tr>
 			<td id="col-span-25">Department</td>
-			<td id="col-span-75">:&nbsp;<c:out value="${s.department}"/></td>
+			<td id="col-span-75">:&nbsp;${sessionScope.s.department}</td>
 		</tr>
 		
 		<tr>
 			<td id="col-span-25">Password</td>
-			<td id="col-span-75">:&nbsp;<c:out value="${s.staffPassword}"/></td>
+			<td id="col-span-75">:&nbsp;${sessionScope.s.staffPassword}</td>
 		</tr>
 		
 	
 	</table>
 	<br><br>
+	     <div class="rowBtn">
+	    <a class ="btnInfo" href="UpdateStaff.jsp">Update</a>
+	    </div>
         
-        
+        </form>
         
         </section>
-
-<!-- - --<div class="loan-request-form-container">
-  <form>
-    <h2>APP ID</h2>
-
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
-    </div>
-
-    <div class="form-group">
-      <label for="employee-id">Employee ID:</label>
-      <input type="text" id="employee-id" name="employee-id" required>
-    </div>
-
-    <div class="form-group">
-      <label for="department">Department:</label>
-      <select id="department" name="department">
-        <option value="sales">Sales</option>
-        <option value="marketing">Marketing</option>
-        <option value="it">IT</option>
-        <option value="hr">HR</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="total-laptop-asset">Total Laptop/Asset:</label>
-      <select id="total-laptop-asset" name="total-laptop-asset">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="purpose">Purpose/Reason:</label>
-      <textarea id="purpose" name="purpose" required></textarea>
-    </div>
-
-    <div class="form-group">
-      <label for="loan-period">Loan Period:</label>
-      <select id="loan-period" name="loan-period">
-        <option value="1">1 Month</option>
-        <option value="2">2 Months</option>
-        <option value="3">3 Months</option>
-        <option value="6">6 Months</option>
-      </select>
-    </div>
-
-    <button type="submit">Submit</button>
-  </form>
-</div>--->
+         </body>
  <footer class="footer">
             © 2023. All Rights Reserved.
         </footer>
 
-</body>
+
 </html>

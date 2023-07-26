@@ -1,3 +1,13 @@
+<%@ page import="java.sql.*"%>
+<%@ page import="connectionDB.*"%>
+<%@ page import="model.Application"%>
+<%@ page import="model.Staff"%>
+<%@ page import="Application.dao.ApplicationDao"%>
+<%@ page import="Staff.dao.StaffDao"%>
+<%@ page import="java.util.List"%>
+<%@page import="java.sql.ResultSet" %>
+<%@page import="java.sql.Statement" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -354,9 +364,6 @@
                 <a href="ListApplication.jsp" class="active">
                     List Application
                 </a>
-                <a href="#">
-                    Profile
-                </a>
                 <a href="index.html">
                     Logout
                 </a>
@@ -420,6 +427,9 @@
                                                 <th>
                                                      DATE RETURN
                                                 </th>
+                                                  <th>
+                                                     APPLICATION STATUS
+                                                </th>
                                               
                                                   <th>
                                                     ACTION
@@ -427,37 +437,46 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                               
-                                                
-                                               
-                                                <td>
+                                              <% 
+                                            	ApplicationDao dao = new ApplicationDao();
+										        List<Application> applications = dao.getAllApplications();
+										        for (Application eachApp : applications) {
+										        	String status = eachApp.getStatus_app();
+										            boolean done = status.equalsIgnoreCase("Approved") || status.equalsIgnoreCase("Declined");
+										    %>
+										    <tr>
+										        <td><%= eachApp.getAppid() %></td>
+										        <td><%= StaffDao.getStaffNameById(eachApp.getStaffid()) %></td>
+										        <td><%= eachApp.getStaffid() %></td>
+										        <td><%= eachApp.getModelName() %></td>
+										        <td><%= eachApp.getTotal_asset() %></td>
+										        <td><%= eachApp.getPurpose() %></td>
+										        <td><%= eachApp.getLoanPeriodDetails() %></td>
+										        <td><%= eachApp.getStartdateloan().toString() %></td>
+										        <td><%= eachApp.getDatereturned().toString() %></td>
+										        <td><%= eachApp.getStatus_app() %></td>
+										    	<td>
                                                     <div class="action">
-                                                      	<button class="button view" >View</button>
-                                                        <button class="button Approve">Approve</button>
-                                                        <button class="button delete" >Decline</button>
-                                                    </div>
+											        <a href="ApproveController?applicationId=<%= eachApp.getAppid() %>"
+											           class="button Approve" style="<%= done ? "pointer-events: none" : "" %>">Approve</a>
+											        <a href="DeclineController?applicationId=<%= eachApp.getAppid() %>"
+											           class="button delete" style="<%= done ? "pointer-events: none" : "" %>">Decline</a>
+											    </div>
                                                 </td>
-                                            </tr>
+										    </tr>
+										    <% } %>
                                         </tbody>
                                        
+                                       
                                     </table>
+                                    	
                                 </div>
                                 
                             </div>
                            
                         </div>
-                        </div>
-                
+                        </div>  	
+                             
                     
                
               

@@ -97,7 +97,190 @@ html, body{
             }
 
             /*topbar end*/
+            /*banner*/
+            .banner{
+                min-height: 100vh;
+                background-image: url(assets/bg.jpg);
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                position: relative;
+            }
 
+
+            .overlay{
+
+                background: rgba(0,0,0, 0.5);
+                width: 100%;
+                height: 100%;
+                position: absolute;
+            }
+
+            .banner-text{
+                min-height: 100vh;
+                position: relative;
+                width: 100%;
+                color: #fff;
+                height: 100%;
+                
+            }
+
+            .banner-text .box{
+                padding: 5%;
+                height: 100%;
+                min-height: 100vh;
+            }
+
+            .banner-text .box .card{
+                padding: 40px;
+            }
+
+            .banner-text h1{
+                font-size: 50px;
+                padding-bottom: 20px;
+            }
+
+            .banner-text h2{
+                font-size: 30px;
+                padding-bottom: 20px;
+            }
+
+            .banner-text span{
+                color: #FFB116;
+            }
+
+            .opt button{
+                background: #e3e3e3;
+                color: #5e5e5e;
+                padding: 16px 20px;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: 500;
+                outline: none;
+                border: none;
+                box-shadow: none;
+                font-size: 14px;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+
+            .inner{
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                margin-top: 30px;
+            }
+
+            .inner-center{
+                justify-content: center;
+            }
+
+            .inner .innercard-full{
+                width: 100%;
+                padding: 30px;
+                background: #f6f2f2;
+                border-radius: 8px;
+                min-height: 250px;
+                position: relative;
+            }
+
+
+            .innercard .content{
+                color: #454545;
+                padding: 15px 5px;
+            }
+
+            .innercard img{
+                width: 50px;
+                position: absolute;
+                right: 0;
+                top: 0;
+                margin-top: 12px;
+                margin-right: 20px;
+            }
+
+            .form-title{
+                color: #000;
+                text-transform: uppercase;
+                font-weight: 500;
+                font-size: 20px;
+                padding-bottom: 20px;
+            }
+            
+       
+.RegisterAsset-form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.RegisterAsset-form-container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+select {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #0066cc;
+  outline: none;
+}
+
+button[type="submit"] {
+  background-color: #4d814a;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+button[type="reset"] {
+  background-color: grey;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+ .footer{
+                border-top: 2px solid #e3e3e3;
+                padding: 20px; 
+                text-align: center;
+                color: #5e5e5e;
+                font-size: 14px;
+            }
 
 </style>
 
@@ -115,8 +298,11 @@ html, body{
             </div>
              <nav class="navbar">
            
-				 <a href="DashboardITSTAFF.jsp" >
-                    Dashboard
+            	<a href="ITStaff Homepage.jsp" class="">
+                    Homepage
+                </a>
+                 <a href="RegisterAsset.jsp" class="">
+                    Register Asset
                 </a>
                  <a href="ListAsset.jsp" class="active" >
                     List Asset
@@ -130,7 +316,7 @@ html, body{
                 <a href="ListOutdatedAsset.jsp">
                     List Outdated Asset
                 </a>
-                <a href="#">
+                <a href="manageInventory.jsp">
                     Manage Inventory
                 </a>
                 <a href="index.html">
@@ -139,6 +325,47 @@ html, body{
             </nav>
             
        </section> 
+       
+        <section class="banner">
+  
+ <div class="RegisterAsset-form-container">
+  <form method="post" action ="InventoryController">
+  
+    <div class="form-group">
+      <label for="InventoryID">Inventory ID:</label>
+	    <%
+		    int randomNumber = (int) (Math.random() * 1000000);
+		%>
+		<input type="text" name="InventoryID" value="<%= randomNumber %>" readonly>
+    </div>
+    <div class="form-group">
+      <label for="ModelName">Model Name:</label>
+      <input type="text"  name="ModelName" required>
+    </div>
+
+    <div class="form-group">
+      <label for="Manfacturer">Manufacturer:</label>
+       <input type="text"  name="Manufacturer" required>
+  
+    </div>
+    
+    <div class="form-group">
+      <label for="TotalAssets">Total Assets:</label>
+      <input type="text"  name="TotalAssets" required>
+    </div>
+    
+  <button type="submit">Create Inventory</button>
+  <button type="reset" style="padding-left:;">Reset</button>
+  </form>
+    </div>
+
+  
+  </section>
+
+
+  <footer class="footer">
+       © 2023. All Rights Reserved.
+        </footer>
 
 </body>
 </html>

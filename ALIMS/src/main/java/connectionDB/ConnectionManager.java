@@ -7,7 +7,7 @@ public class ConnectionManager {
 	
 	static Connection con;
 	private static final String DB_DRIVER="org.postgresql.Driver";
-	private static final String DB_CONNECTION="jdbc:postgresql://localhost:5432/ALIMS";
+	private static final String DB_CONNECTION="jdbc:postgresql://localhost:5432/alims";
 	private static final String DB_USER="postgres";
 	private static final String DB_PASSWORD="system";
 

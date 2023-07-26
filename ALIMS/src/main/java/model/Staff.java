@@ -127,7 +127,12 @@ public class Staff {
 	public void setValid(boolean valid) {
 		this.valid = valid;
 	}
-
+	@Override
+	public String toString() {
+		return "Staff [StaffID=" + StaffID + ", Staffname=" + Staffname + ", StaffPassword=" + StaffPassword
+				+ ", phoneNum=" + phoneNum + ", department=" + department + ", EmailStaff=" + EmailStaff + ", role="
+				+ role + ", JobPosition=" + JobPosition + ", managerID=" + managerID + ", valid=" + valid + "]";
+	}
     
 }
 

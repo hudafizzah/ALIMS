@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.*" %> 
+<%@ page import = "connectionDB.ConnectionManager" %>
+<%@page import="java.sql.ResultSet" %>
+<%@page import="java.sql.Statement" %>
+<%@page import="java.util.List" %>
+<%@page import="inventory.dao.InventoryDao" %>
+<%@page import="model.Inventory" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -349,8 +356,11 @@ html, body{
             </div>
              <nav class="navbar">
            
-				 <a href="DashboardITSTAFF.jsp" >
-                    Dashboard
+				<a href="ITStaff Homepage.jsp" class="">
+                    Homepage
+                </a>
+                 <a href="RegisterAsset.jsp" class="">
+                    Register Asset
                 </a>
                  <a href="ListAsset.jsp" >
                     List Asset
@@ -384,7 +394,7 @@ html, body{
                             <div class="innercard-full">
 
                                 <div class="form-title">
-                                    Manage Asset
+                                    Manage Inventory
                                 </div>
 
                                 <div class="filter-row">
@@ -393,9 +403,8 @@ html, body{
                                       
                                     </div>
 
-                                    <input type="text" placeholder="Search By ASSET TYPE" />
+                                    <input type="text" placeholder="Search By model Name" />
                                 </div>
-
 
                                 <div class="table-box">
                                     <table class="table">
@@ -405,32 +414,40 @@ html, body{
                                                     INVENTORY ID
                                                 </th>
                                                 <th>
-                                                    ASSET TYPE
+                                                    MODEL NAME
                                                 </th>
                                                 <th>
-                                                    TOTAL ASSET
+                                                    MANUFACTURER
                                                 </th>
-                                               
-                                              
-                                                  <th>
+                                                <th>
+                                                    TOTAL ASSETS
+                                                </th>
+                                                <th>
                                                     ACTION
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        
+                                        <%
+                                        	InventoryDao dao = new InventoryDao();
+                                        	List<Inventory> inventory = dao.getAllInventories();
+                                        	for (Inventory each: inventory) {
+                                        %>
                                             <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                               
-                                            
-                                                <td>
+                                                <td><%= each.getId() %></td>
+                                                <td><%= each.getModelName() %></td>
+                                                <td><%= each.getManufacturer() %></td>
+                                                <td><%= each.getTotalAssets() %></td>
+                                            	<td>
                                                     <div class="action">
-                                                      	<button class="button view">View</button>
-                                                        <button class="button delete">Delete</button>
+                                                        <a href="DeleteInventoryController?deleteinventoryid=<%= each.getId() %>"class="button delete">Delete</a>
                                                     </div>
                                                 </td>
                                             </tr>
+                                        <%
+                                        	}
+                                        %>
                                         </tbody>
                                        
                                     </table>
@@ -442,8 +459,6 @@ html, body{
                         </div>
                 
                     
-               
-            
           </section>
           
                  <footer class="footer">

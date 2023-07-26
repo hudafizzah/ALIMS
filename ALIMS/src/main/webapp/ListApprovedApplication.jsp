@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.*"%>
+<%@ page import="connectionDB.*"%>
+<%@ page import="model.Application"%>
+<%@ page import="model.Staff"%>
+<%@ page import="Application.dao.ApplicationDao"%>
+<%@ page import="Staff.dao.StaffDao"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -311,7 +318,7 @@
                 color: #000;
             }
             .decline{
-                background: #ff1631;
+                  background: #f40505;
                 color: #000;
             }
             
@@ -378,10 +385,8 @@
             </div>
             <nav class="navbar">
 
-              <a href="DashboardITSTAFF.jsp" >
-                    Dashboard
-                </a>
-                <a href="ITSTaff Homepage.jsp" class="active">
+             
+                <a href="ITStaff Homepage.jsp" >
                     Homepage
                 </a>
                  <a href="RegisterAsset.jsp">
@@ -482,27 +487,38 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-                                                    <div class="action">
-                                                        <button  class="button approve">Approve</button>
-                                                        <button class="button decline">Decline</button>
-                                                        <button onclick="window.location.href='UpdateApprovedApplication.jsp';" class="button update">Update</button>
-                                                   
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                      <% 
+                                     	ApplicationDao dao = new ApplicationDao();
+										List<Application> applications = dao.getAllApplications();
+										for (Application eachApp : applications) {
+											if (eachApp.getStatus_app().equals("Approved")) {
+									%>
+									<tr>
+										<td><%= eachApp.getAppid() %></td>
+										<td><%= StaffDao.getStaffNameById(eachApp.getStaffid()) %></td>
+										<td><%= eachApp.getTotal_asset() %></td>
+										<td><%= eachApp.getPurpose() %></td>
+										<td><%= eachApp.getLoanPeriodDetails() %></td>
+										<td><%= eachApp.getStartdateloan().toString() %></td>
+										<td><%= eachApp.getDatereturned().toString() %></td>
+										<td><%= eachApp.getModelName() %></td>
+										<td><%= eachApp.getAssetid() %></td>
+										<td><%= eachApp.getStatus_app() %></td>
+										<td>
+											<div class="action">
+												<a
+													href="ApproveControllerIT?applicationId=<%= eachApp.getAppid() %>"
+													class="button Approve">Approve</a> <a
+													href="DeclineControllerIT?applicationId=<%= eachApp.getAppid() %>"
+													class="button delete">Decline</a>
+													<button
+													onclick="window.location.href='UpdateApprovedApplication.jsp?applicationId=<%= eachApp.getAppid() %>';"
+													class="button update">Update</button>
+											</div>
+										</td>
+									</tr>
+									<% }} %>
+								</tbody>
                                        
                                     </table>
                                 </div>

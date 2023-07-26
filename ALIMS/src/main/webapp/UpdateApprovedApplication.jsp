@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@ page import="java.sql.*"%>
+<%@ page import="connectionDB.*"%>
+<%@ page import="model.Application"%>
+<%@ page import="model.Asset"%>
+<%@ page import="Asset.dao.AssetDao"%>
+<%@ page import="java.util.List"%>
+<%@ page import="model.Staff"%>
+<%@ page import="Application.dao.ApplicationDao"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -305,7 +313,79 @@
                 flex-direction: column;
             }
             /*banner*/
+.loan-request-form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
 
+.RegisterAsset-form-container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+select {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #0066cc;
+  outline: none;
+}
+
+button[type="submit"] {
+  background-color: #4d814a;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+button[type="reset"] {
+  background-color: grey;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+ .footer{
+                border-top: 2px solid #e3e3e3;
+                padding: 20px; 
+                text-align: center;
+                color: #5e5e5e;
+                font-size: 14px;
+            }
 
             /*content*/
 
@@ -334,6 +414,12 @@
 		   		<a href="DashboardITSTAFF.jsp" >
                     Dashboard
                 </a>
+                 <a href="ITStaff Homepage.jsp" class="active">
+                    Homepage
+                </a>
+                 <a href="RegisterAsset.jsp">
+                    Register Asset
+                </a>
 
                 <a href="ListAsset.jsp">
                     List Asset
@@ -347,7 +433,7 @@
                 <a href="ListOutdatedAsset.jsp">
                     List Outdated Asset
                 </a>
-                <a href="#">
+                <a href="manageInventory.jsp">
                     Manage Inventory
                 </a>
                 <a href="index.html">
@@ -361,90 +447,72 @@
 
         <section class="banner">
 
-            <div class="overlay"></div>
-            <div class="banner-text">
+          
+		<div class="loan-request-form-container">
 
-                <div class="box">
-                    <div class="card">
-
-                       
-        
-                        <div class="inner inner-center">
-
-                            <div class="innercard-md">
-
-                                <div class="form-title">
-                                    App ID
-                                </div>
+								<form method="post" action="UpdateApplication">
+                                <% 
+                                     	ApplicationDao dao = new ApplicationDao();
+										Application a = dao.getApplicationById(Integer.parseInt(request.getParameter("applicationId")));
+									%>
 
                                 <div class="form-body">
 
-                                    <div class="fgroup">
-                                        <label>Name</label>
-                                        <input type="text" class="forminput" placeholder="Name" />
-                                    </div>
-                                    <div class="fgroup">
-                                        <label>Loan Period</label>
-                                        <input type="text" class="forminput" placeholder="Loan Period" />
-                                    </div>
-                                    <div class="fgroup">
-                                        <label>Staff ID</label>
-                                        <input type="text" class="forminput" placeholder="Staff ID" />
-                                    </div>
-                                    <div class="fgroup">
-                                        <label>Date Loaned</label>
-                                        <input type="date" class="forminput" placeholder="Date Loaned" />
-                                    </div>
-                                    <div class="fgroup">
-                                        <label>Department</label>
-                                        <input type="text" class="forminput" placeholder="Department" />
-                                    </div>
-                                    <div class="fgroup">
-                                        <label>Date Returned</label>
-                                        <input type="date" class="forminput" placeholder="Date Returned" />
-                                    </div>
-                                    <div class="fgroup">
-                                        <label>Total Laptop</label>
-                                        <select class="forminput">
-                                            <option value="" selected>1</option>
-                                        </select>
-                                    </div>
-                                    <div class="fgroup">
-                                        <label>Model Name</label>
-                                        <select class="forminput">
-                                            <option value="1">Microsoft Surface 7</option>
-        									<option value="2">Microsoft surface Pro 9</option>
-       									    <option value="3">Microsoft surface Pro 5</option>
-        									<option value="4">HP EliteBook</option>
-        									<option value="5">Dell Inspiron16</option>
-                                        </select>
-                                    </div>
-                                    <div class="fgroup">
-                                        <label>Purpose</label>
-                                        <input type="text" class="forminput" placeholder="Purpose/Reason" />
-                                    </div>
-                                    <div class="fgroup">
-                                        <label>Asset ID</label>
-                                     <input type="text" class="forminput" placeholder="" />
-                                    </div>
-                                    
+									<h2>Update Application</h2>
+										<br>
+									<div class="form-group">
+										<label for="appid">Application ID</label>
+										 <input type="text" name="appid" value="<%= a.getAppid() %>" readonly>
+									</div>
+
+									<div class="form-group">
+										<label for="purpose">Purpose</label> 
+										<input name="purpose" type="text" class="forminput" placeholder="Purpose/Reason" value="<%= a.getPurpose() %>"  />
+									</div>
+									<div class="form-group">
+										<label for="total asset">Total Laptops</label> 
+										<input name="total_asset" type="text" class="forminput" placeholder="Total Laptops" value="<%= a.getTotal_asset() %>"  />
+									</div>
+									<div class="form-group">
+										<label for="startdateloan">Start Date Loan</label> 
+										<input name="startdateloan" type="date" class="forminput" placeholder="Date Loaned" value="<%= a.getStartdateloan() %>" />
+									</div>
+					
+									<div class="form-group">
+										<label for="date returned">Date Return</label> 
+										<input name="datereturned" type="date" class="forminput" placeholder="Date Returned" value="<%= a.getDatereturned() %>" />
+									</div>
+					
+									<div class="form-group">
+										<label for="appmodelid">Asset Model</label> <select
+											name="appmodelid">
+											<%
+											List<Asset> assets = AssetDao.getAllAssetsList();
+											for (Asset asset : assets) {
+												boolean isSelected = a.getAssetid() == asset.getAssetID();
+											%>
+											<option value="<%=asset.getAssetID()%>" <%= isSelected ? " selected" : "" %>><%=asset.getCompleteAssetString()%></option>
+											<%
+											}
+											%>
+										</select>
+									</div>
+					
+									<input type="hidden" name="StaffID"
+										value="<%=session.getAttribute("staffID")%>">
+										
                                 </div>
                                 <div class="rowBtn">
                                     
-                                    <button class="btnInfo">Update Info</button>
+                                    <button type="submit" class="btnInfo">Update Info</button>
                                     <button onclick="window.location.href='UpdateSmsAlertForm.jsp';"class="btnAlert">Update & Sms Alert</button>
 
                                 </div>
-                                
+                                </form>
                             </div>
-                            
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
             
         </section>
+          
 
 
         <footer class="footer">

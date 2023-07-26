@@ -193,8 +193,8 @@ button[type="submit"] {
     <div class="form-group">
       <label for="Role">Role</label>
        <select  name="role">
-        <option value="IT">IT Staff</option>
-        <option value="Manager">Staff Manager</option>
+        <option value="IT Staff">IT Staff</option>
+        <option value="Staff Manager">Staff Manager</option>
         <option value="Staff">Staff</option>
         
       </select>
@@ -210,23 +210,23 @@ button[type="submit"] {
         <option value="Client advisor">Client advisor</option>
          <option value="Production">Production Staff</option>
           <option value="Analyst">Analyst</option>
-         <option value="Department Manager">Department Manager</option>
+         <option value="Head Manager">Head Manager</option>
       </select>
     </div>
     
   <div class="form-group">
       <label for="department">Department</label>
       <select id="department" name="department">
-        <option value="sales">Sales</option>
-        <option value="marketing">Marketing</option>
-        <option value="it">IT</option>
-        <option value="hr">HR</option>
-        <option value="f&B">F&B</option>
+        <option value="Sales">Sales</option>
+        <option value="Marketing">Marketing</option>
+        <option value="IT">IT</option>
+        <option value="HR">HR</option>
+        <option value="F&B">F&B</option>
         <option value="Finance">Finance</option>
         <option value="Facilities">Facilities</option>
-        <option value="procurement">Procurement</option>
+        <option value="Procurement">Procurement</option>
         <option value="Pest Control">Pest Control</option>
-        <option value="institutional">Institutional</option>
+        <option value="Institutional">Institutional</option>
       </select>
     </div>
     

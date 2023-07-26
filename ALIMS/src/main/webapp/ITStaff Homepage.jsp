@@ -422,46 +422,46 @@ form{
 
  </section>
         <section class= "banner">
-          <form method="Get"  action ="ViewStaffController" style= "padding:50px 50px 50px 50px; text-align:auto;">
+          <form method="Get"  action ="LoginStaffController" style= "padding:50px 50px 50px 50px; text-align:auto;">
 	<h1>WELCOME</h1>
 	<table>
 		<tr>
 			<td id="col-span-25">Staff ID</td>
-			<td id="col-span-75">:&nbsp;<c:out value="${s.StaffID}"/></td>
+			<td id="col-span-75">:&nbsp;${sessionScope.s.staffID}</td>
 		</tr>
 		
 		<tr>
 			<td id="col-span-25">Staff Name</td>
-			<td id="col-span-75">:&nbsp;<c:out value="${s.staffname}"/></td>
+			<td id="col-span-75">:&nbsp;${sessionScope.s.staffname}</td>
 		</tr>
 		<tr>
 			<td id="col-span-25">Phone Number</td>
-			<td id="col-span-75">:&nbsp;<c:out value="${s.phoneNum}"/></td>
+			<td id="col-span-75">:&nbsp;${sessionScope.s.phoneNum}</td>
 		</tr>
 		
 		<tr>
 			<td id="col-span-25">Email Staff</td>
-			<td id="col-span-75">:&nbsp;<c:out value="${s.EmailStaff}"/></td>
+			<td id="col-span-75">:&nbsp;${sessionScope.s.emailStaff}</td>
 		</tr>
 		
 		<tr>
 			<td id="col-span-25">Role</td>
-			<td id="col-span-75">:&nbsp;<c:out value="${s.role}"/></td>
+			<td id="col-span-75">:&nbsp;${sessionScope.s.role}</td>
 		</tr>
 		
 		<tr>
 			<td id="col-span-25">Job Position</td>
-			<td id="col-span-75">:&nbsp;<c:out value="${s.JobPosition}"/></td>
+			<td id="col-span-75">:&nbsp;${sessionScope.s.jobPosition}</td>
 		</tr>
 		
 		<tr>
 			<td id="col-span-25">Department</td>
-			<td id="col-span-75">:&nbsp;<c:out value="${s.department}"/></td>
+			<td id="col-span-75">:&nbsp;${sessionScope.s.department}</td>
 		</tr>
 		
 		<tr>
 			<td id="col-span-25">Password</td>
-			<td id="col-span-75">:&nbsp;<c:out value="${s.staffPassword}"/></td>
+			<td id="col-span-75">:&nbsp;${sessionScope.s.staffPassword}</td>
 		</tr>
 		
 	

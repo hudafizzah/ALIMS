@@ -1,5 +1,4 @@
 package Staff.controller;
-import java.io.*;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -8,7 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 //import java.sql.*;
 import model.Staff;
 import Staff.dao.*;
@@ -49,8 +48,9 @@ public class CreateStaffController extends HttpServlet {
 	    
 		//request.setAttribute("staff", StaffDao.getAllStaff((int)session.getAttribute("currentUser")));
 		request.setAttribute("staff", StaffDao.getAllStaff());
-		RequestDispatcher view = request.getRequestDispatcher("ListStaff.jsp");
-		view.forward(request, response);
+		response.sendRedirect("index.html");
+		//RequestDispatcher view = request.getRequestDispatcher("ListStaff.jsp");
+		//view.forward(request, response);
 		
 	}
 		

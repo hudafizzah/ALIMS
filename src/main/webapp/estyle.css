@@ -1,0 +1,148 @@
+@charset "ISO-8859-1";
+
+*
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins',sans-serif;
+  text-decoration: none;
+}
+
+body
+{
+  background-color: #f9f8f3 ;
+}
+
+*, *:before, *:after
+{
+  box-sizing: border-box;
+  font: 300 1em/1.5 'Merriweather', serif; color: #242424;
+}
+
+header
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background:#38afcd;
+  /*box-shadow: 0 5px 10px rgba(0,0,0,.1);*/
+ padding: 1px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  text-transform: capitalize;
+}
+
+header .logo
+{
+  font-weight: 600;
+  font-size: 33px;
+  color: white;
+}
+
+header .nav ul
+{
+  list-style: none;
+}
+
+header .nav ul li
+{
+  position: relative;
+  float: left;
+}
+
+header .nav ul li a
+{
+  font-size: 20px;
+  padding: 20px;
+  color: white;
+  display: block;
+}
+
+header .nav ul li a:hover
+{
+  background: grey;
+  color: white;
+}
+
+header .nav ul li ul
+{
+  position: absolute;
+  left: 0;
+  width: 170px;
+  background: black;
+  display: none;
+}
+
+header .nav ul li ul li
+{
+  width: 100%;
+  border-top: 1px solid rgba(0,0,0,.1);
+}
+
+header .nav ul li:focus-within > ul,
+header .nav ul li:hover > ul
+{
+  display: initial;
+}
+
+
+.loan-request-form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.loan-request-form-container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+select {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #0066cc;
+  outline: none;
+}
+
+button[type="submit"] {
+  background-color: #4d814a;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}

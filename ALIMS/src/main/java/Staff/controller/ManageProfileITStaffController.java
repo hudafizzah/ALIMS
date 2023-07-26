@@ -1,11 +1,14 @@
 package Staff.controller;
 import java.io.IOException;
+
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import Staff.dao.*;
 import model.Staff;
 @WebServlet("/ManageProfileITStaffController")
@@ -27,7 +30,63 @@ public class ManageProfileITStaffController extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getParameter("action");
+		
+		int id = Integer.parseInt(request.getParameter("staffId"));
+		String name = request.getParameter("staffName");
+		String phone = request.getParameter("phoneNum");
+		String email = request.getParameter("emailStaff");
+		String department = request.getParameter("department");
+		String job = request.getParameter("jobPosition");
+		String password = request.getParameter("staffPassword");
+		
+		Staff staff = StaffDao.getStaffById(id);
+		staff.setStaffname(name);
+		staff.setPhoneNum(phone);
+		staff.setEmailStaff(email);
+		staff.setDepartment(department);
+		staff.setJobPosition(job);
+		staff.setStaffPassword(password);
+		
+		//StaffDao.updateStaffModel(staff);
+		
+		//Create Session
+		HttpSession session = request.getSession();
+		
+		request.setAttribute("s", staff);
+		session.setAttribute("s", staff);
+		RequestDispatcher view = request.getRequestDispatcher("ITStaff Homepage.jsp");
+		view.forward(request, response);
+		
+		
+	
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*String action = request.getParameter("action");
 		Staff s = new Staff();
 		
 		//CONDITION IF CHANGE PASSWORD
@@ -62,7 +121,7 @@ public class ManageProfileITStaffController extends HttpServlet {
 		//FORWARD TO MANAGE MEMBER
 		request.setAttribute("s", StaffDao.getStaffById(s.getStaffID()));
 		RequestDispatcher view = request.getRequestDispatcher("UpdateITStaff.jsp");
-		view.forward(request, response);
+		view.forward(request, response);*/
 	}
 
 }

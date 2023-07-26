@@ -6,6 +6,9 @@
 <%@ page import = "connectionDB.ConnectionManager" %>
 <%@page import="java.sql.ResultSet" %>
 <%@page import="java.sql.Statement" %>
+<%@page import="java.util.List" %>
+<%@page import="Asset.dao.AssetDao" %>
+<%@page import="model.Asset" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -355,16 +358,13 @@
                <img src="assets/logo.png" />
             </div>
             <nav class="navbar">
-            <a href="DashboardITSTAFF.jsp" >
-                    Dashboard
-                </a>
-                <a href="#" class="active">
+                <a href="ITStaff Homepage.jsp" class="">
                     Homepage
                 </a>
                   <a href="RegisterAsset.jsp">
                     Register Asset
                 </a>
-                <a href="#" class="active">
+                <a href="ITStaff Homepage.jsp" class="active">
                     List Asset
                 </a>
                 <a href="ListApprovedApplication.jsp">
@@ -399,7 +399,7 @@
                            <button onclick="window.location.href='RegisterAsset.jsp';" type="button" class="btnAlert"> 
                                 Add Asset
                             </button>
-                            <button type="button" href="#"> 
+                             <button onclick="window.location.href='AddInventory.jsp';" type="button"> 
                                 Add Inventory
                             </button>
                         </div>
@@ -460,26 +460,33 @@
                
                 
                                         <tbody>
-                                        <c:forEach items = "${Asset}" var ="a">
+                                          <%
+                                        
+                                        List<Asset> assetsList = AssetDao.getAllAsset(Integer.parseInt(session.getAttribute("staffID").toString()));
+                                        for (Asset each: assetsList) {
+                                        
+                                        %>
+                                        
                                             <tr>
-                                                <td><c:out value = "${a.AssetID} "/></td>
-                                                <td><c:out value = "${a.modelname} "/></td>
-                                                <td><c:out value = "${a.asset_datepurchase} "/></td>
-                                                <td><c:out value = "${a.manufacturer} "/></td>
-                                                <td><c:out value = "${a.inventoryid} "/></td>
-                                                <td><c:out value = "${a.StaffID} "/></td>
+                                                <td><%= each.getAssetID() %></td>
+                                                <td><%= each.getModelname() %></td>
+                                                <td><%= each.getAsset_datepurchase() %></td>
+                                                <td><%= each.getManufacturer() %></td>
+                                                <td><%= each.getInventoryid() %></td>
+                                                <td><%= each.getStaffID() %></td>
                                                   
                                                 
                                                   <td>
-                                                    
-                                                       <div> <button class="button view">View</button>
-                                                        <button class="button update">Update</button>
-                                                        <button class="button delete">Delete</button>
-                                                    </div>
-                                                 
+                                                        <a href="UpdateAsset.jsp?updateassetid=<%= each.getAssetID() %>"class="button update">Update</a>
+                                                  		
+                                                  		<a href="DeleteAssetController?deleteassetid=<%= each.getAssetID() %>"class="button delete">Delete</a>
+       
                                               </td>
                                               </tr>
-                                                </c:forEach>
+                                        <%
+                                        }
+                                        %>    
+                                       
                                         </tbody>
                                        
                                     </table>

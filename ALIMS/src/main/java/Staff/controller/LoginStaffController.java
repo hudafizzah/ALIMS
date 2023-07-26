@@ -1,6 +1,7 @@
 package Staff.controller;
 
 import java.io.IOException;
+
 import java.io.*;
 import java.sql.*;
 import javax.servlet.RequestDispatcher;
@@ -89,7 +90,8 @@ public class LoginStaffController extends HttpServlet {
 			//request.setAttribute("s", StaffDao.getStaffById(s.getStaffID()));
 			
 			//session.setAttribute("currentSessionUser", s.getManagerID());
-			//request.setAttribute("s", StaffDao.getStaffById(s.getManagerID()));
+			request.setAttribute("s", StaffDao.getStaffById(resultStaff.getInt("staffID")));
+			session.setAttribute("s", StaffDao.getStaffById(resultStaff.getInt("staffID")));
 			
 			if(role.equalsIgnoreCase("IT Staff")){
 				//redirect to IT's home page

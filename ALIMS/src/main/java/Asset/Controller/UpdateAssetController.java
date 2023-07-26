@@ -2,7 +2,6 @@ package Asset.Controller;
 
 import java.io.IOException;
 import java.sql.Date;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,15 +31,12 @@ public class UpdateAssetController extends HttpServlet {
 	
 		Asset a = new Asset ();
 		a.setAssetID(Integer.parseInt(request.getParameter("AssetID")));
-		a.setModelname(request.getParameter("modelname"));
-		a.setAsset_datepurchase(Date.valueOf(request.getParameter("StaffID")));
-		a.setManufacturer(request.getParameter("manufacturer"));
+		a.setAsset_datepurchase(Date.valueOf(request.getParameter("asset_datepurchase")));
 		a.setInventoryid(Integer.parseInt(request.getParameter("inventoryid")));
 		a.setStaffID(Integer.parseInt(request.getParameter("StaffID")));
 		
 		dao.updateAsset(a);
 		
-		request.setAttribute("Asset", AssetDao.getAllAsset());
 		RequestDispatcher View = 	request.getRequestDispatcher("ListAsset.jsp");
 		View.forward(request, response);
 	}

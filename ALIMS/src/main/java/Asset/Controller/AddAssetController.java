@@ -26,14 +26,11 @@ public class AddAssetController extends HttpServlet {
 	    
 	    a.setAssetID(Integer.parseInt(request.getParameter("AssetID")));
 	    a.setAsset_datepurchase(Date.valueOf(request.getParameter("asset_datepurchase")));
-	    a.setModelname(request.getParameter("modelname"));
-	   a.setManufacturer(request.getParameter("manufacturer"));
 	   a.setInventoryid(Integer.parseInt(request.getParameter("inventoryid")));
 	   a.setStaffID(Integer.parseInt(request.getParameter("StaffID")));
 	    
 	    dao.addAsset(a);
 	    
-	    request.setAttribute("Asset", AssetDao.getAllAsset());
 	    RequestDispatcher view = request.getRequestDispatcher("ListAsset.jsp");
 	    view.forward(request, response);
 	}

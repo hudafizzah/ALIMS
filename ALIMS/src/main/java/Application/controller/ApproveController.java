@@ -1,29 +1,34 @@
-package Asset.Controller;
+package Application.controller;
 
 import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Asset.dao.*;
-import model.Asset;
+import Application.dao.ApplicationDao;
 
-@WebServlet("/ListAssetController")
-public class ListAssetController extends HttpServlet {
+@WebServlet("/ApproveController")
+public class ApproveController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private AssetDao dao;
-    public ListAssetController() {
+	private ApplicationDao applicationDao;
+	   
+ 
+    public ApproveController() {
         super();
-        dao = new AssetDao();
+        applicationDao =new ApplicationDao();
     }
 
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("Asset", AssetDao.getAllAsset());
-		RequestDispatcher view = request.getRequestDispatcher("ListAsset");
+		int appid = Integer.parseInt(request.getParameter("applicationId"));
+    	applicationDao.updateApplicationStatus(appid, "Approved");
+    	RequestDispatcher view = request.getRequestDispatcher("ListApplication.jsp");
 		view.forward(request, response);
+	
 	}
+
+	
 
 }

@@ -1,7 +1,5 @@
 package Staff.dao;
 import java.sql.*;
-
-
 import java.util.*;
 import connectionDB.*;
 import model.Staff;
@@ -90,6 +88,29 @@ public class StaffDao {
     		e.printStackTrace();
     	}
     	return s;
+    }
+  
+    //get staff by id
+    public static String getStaffNameById (int StaffID) {
+    	String name = null;
+    	try {
+    		//call getConnection method
+    		con = ConnectionManager.getConnection();
+    		//create statement
+    		ps=con.prepareStatement("SELECT staffname FROM staff Where StaffID = ?");
+    		ps.setInt(1, StaffID);
+    		
+    		//execute query
+    		rs=ps.executeQuery();
+    		if(rs.next()){
+    			name = rs.getString("staffname");
+    		}
+    		//close connection
+    		con.close();
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	return name;
     }
     
     //CRUD
@@ -228,23 +249,26 @@ public class StaffDao {
     }*/
 	//update staff
 	public void updatestaff (Staff existingStaff) {
-  		StaffID = existingStaff.getStaffID();
-  		EmailStaff =existingStaff.getEmailStaff();
+		StaffID = existingStaff.getStaffID();
+  		String staffName = existingStaff.getStaffname();
+		EmailStaff =existingStaff.getEmailStaff();
   		StaffPassword =existingStaff.getStaffPassword();
   		phoneNum =existingStaff.getPhoneNum();
+  		String jobPosition = existingStaff.getJobPosition();
   		department=existingStaff.getDepartment();
-    	
     	 try {
     		 //call getConnection method
     		 con = ConnectionManager.getConnection ();
     		 
     		 //create statement
-    		ps = con.prepareStatement("UPDATE staff SET EmailStaff=?, StaffPassword=?, phoneNum=?, department=? WHERE StaffID=?");
-     		ps.setString(1, EmailStaff);
-     		ps.setString(2, StaffPassword);
-     		ps.setString(3, phoneNum);
-     		ps.setString(4, department);
-     		ps.setInt(5, StaffID);
+    			ps = con.prepareStatement("UPDATE staff SET staffname=?, EmailStaff=?, StaffPassword=?, phoneNum=?, jobposition=?, department=? WHERE StaffID=?");
+         		ps.setString(1, staffName);
+        		ps.setString(2, EmailStaff);
+         		ps.setString(3, StaffPassword);
+         		ps.setString(4, phoneNum);
+         		ps.setString(5, jobPosition);
+         		ps.setString(6, department);
+         		ps.setInt(7, StaffID);
     		 
      		//execute query
      		ps.executeUpdate();

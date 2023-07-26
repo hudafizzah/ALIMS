@@ -146,9 +146,54 @@
             .banner-text span{
                 color: #FFB116;
             }
-			
+	.RegisterAsset-form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+ form {
+  display: flex;
+  flex-wrap: wrap;
+}
 
+.form-group {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
 
+input[type="text"],
+textarea,
+select {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #0066cc;
+  outline: none;
+}
+button[type="submit"] {
+  background-color: #4d814a;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}		
 
  .footer{
                 border-top: 2px solid #e3e3e3;
@@ -175,9 +220,9 @@
             </div>
             <nav class="navbar">
            
-				<a href="NormalStaff Homepage.jsp" >
-                    Home Manager
-                    
+				<a href="NormalStaff Homepage.jsp" class="active">
+                    Home Staff
+                   </a> 
                     <a href="CreateApplication.jsp">
                     Create Application
                 </a>
@@ -185,9 +230,7 @@
                 <a href="MyApplication.jsp">
                     My Application
                 </a>
-                <a href="#"class="active">
-                    Profile
-                </a>
+              
                 <a href="index.html">
                     Logout
                 </a>
@@ -197,36 +240,60 @@
         </section>
         
         <section class="banner">
-        
-	<div class="loan-request-form-container">
-        <form action="" method="post" style= "padding:50px 50px 50px 50px; text-align:auto;">
-		<div class= "">
-		<label>Staff ID</label> :&nbsp;  <br><br>
-		
-		</div>
-		
-		<label >Name</label>:&nbsp;
-		<input type="text" name="" value=""/><br>
-		<label>Phone Number</label>:&nbsp;<br>
-		<input type="text" name="" id= "col-span-75" value=""/><br>
-		<label>Email Staff</label>:&nbsp;
-		<input type="text" name=""  value=""/><br>
-		<label>Role</label>:&nbsp;
-		<input type="text" name=""  value=""/><br>
-		<label>Job Position</label>:&nbsp;
-		<input type="text" name="" value=""/><br>
-		<label>Department</label>:&nbsp;
-		<input type="text" name=""  value=""/>
-		<label>Password</label>:&nbsp;
-		<input type="text" name="" value=""/>
-		
-		<input type="submit" value="Submit"/>
-		<input type="reset" value="Reset"/>
+  
 
-	</form>
-	</div>
+							<div class="RegisterAsset-form-container">
+								<label>Staff ID</label>  ${sessionScope.s.staffID} <br><br>
+							
+							<form method="post" action="ManageProfileNormalStaff">
+								<div class="form-group">
+
+									<input type="hidden" name="staffId" value="${sessionScope.s.staffID}">
+									<div class="form-group">
+										<label>Name</label> <input type="text" name="staffName"
+										    class="forminput" placeholder="Name"
+											value="${sessionScope.s.staffname}" /><br>
+									</div>
+									<div class="form-group">
+										<label>Phone Number</label><input type="text" name="phoneNum"
+										    class="forminput" placeholder="Phone Number"
+											value="${sessionScope.s.phoneNum}" /><br>
+									</div>
+									<div class="form-group">
+										<label>Email</label> <input type="email" name="emailStaff"
+										    class="forminput" placeholder="Email Staff"
+											value="${sessionScope.s.emailStaff}" /><br>
+									</div>
+									<div class="form-group">
+										<label>Department</label> <input type="text" name="department"
+										    class="forminput" placeholder="Department"
+											value="${sessionScope.s.department}" /><br>
+									</div>
+									<div class="form-group">
+										<label>Job Position</label> <input type="text" name="jobPosition"
+										    class="forminput" placeholder="Job Position"
+											value="${sessionScope.s.jobPosition}" /><br>
+									</div>
+									<div class="form-group">
+										<label>Staff Password</label> <input type="text" name="staffPassword"
+										    class="forminput" placeholder="Password"
+											value="${sessionScope.s.staffPassword}" /><br>
+									</div>
+									
+								</div>
+								<div class="rowBtn">
+
+									<button type="submit" class="btnInfo">Update Info</button>
+
+								</div>
+							</form>
+				           </div>
+
 	</section>
 
+          <footer class="footer">
+            © 2023. All Rights Reserved.
+        </footer>
 
 </body>
 </html>

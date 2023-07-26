@@ -1,3 +1,8 @@
+<%@ page import="java.sql.*"%>
+<%@ page import="connectionDB.*"%>
+<%@ page import="model.Application"%>
+<%@ page import="Application.dao.ApplicationDao"%>
+<%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -354,9 +359,6 @@
                 <a href="MyApplication.jsp" class="active">
                     My Application
                 </a>
-                <a href="UpdateStaff.jsp">
-                    Profile
-                </a>
                 <a href="index.html">
                     Logout
                 </a>
@@ -377,7 +379,7 @@
                             <div class="innercard-full">
 
                                 <div class="form-title">
-                                    Manage Asset
+                                    My Application
                                 </div>
 
                                 <div class="filter-row">
@@ -398,11 +400,11 @@
                                                     APPLICATION ID
                                                 </th>
                                                 <th>
-                                                    Loan Period
+                                                    LOAN PERIOD
                                                 </th>
                                  
                                                  <th>
-                                                    Purpose
+                                                    PURPOSE
                                                 </th>
                                                 <th>
                                                     TOTAL LAPTOP
@@ -422,35 +424,31 @@
                                                      STAFF ID
                                                 </th>
                                                   <th>
-                                                    Application Status
+                                                    APPLICATION STATUS
                                                 </th>
                                               
-                                                  <th>
-                                                    ACTION
-                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                               
-                                                
-                                               
-                                                <td>
-                                                    <div class="action">
-                                                      	<button class="button view" >View</button>
-                                                       
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                           <% 
+                                            	ApplicationDao dao = new ApplicationDao();
+										        List<Application> applications = dao.getAllApplicationsByStaff(
+										        		Integer.parseInt(session.getAttribute("staffID").toString()));
+										        for (Application eachApp : applications) {
+										    %>
+										    <tr>
+										        <td><%= eachApp.getAppid() %></td>
+										        <td><%= eachApp.getLoanPeriodDetails() %></td>
+										        <td><%= eachApp.getPurpose() %></td>
+										        <td><%= eachApp.getTotal_asset() %></td>
+										        <td><%= eachApp.getStartdateloan().toString() %></td>
+										        <td><%= eachApp.getDatereturned().toString() %></td>
+										        <td><%= eachApp.getModelName() %></td>
+										        <td><%= eachApp.getStaffid() %></td>
+										        <td><%= eachApp.getStatus_app() %></td>
+										        
+										    </tr>
+										    <% } %>
                                         </tbody>
                                        
                                     </table>
@@ -460,12 +458,7 @@
                            
                         </div>
                         </div>
-                
-                    
-               
-              
-              
-           
+                                           
           </section>
           
                  <footer class="footer">
